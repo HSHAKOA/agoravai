@@ -1,284 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feliz Aniversário!</title>
+  <meta charset="UTF-8">
+  <title>Controle de Materiais</title>
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #6ad1f3 0%, #b3e0f2 50%, #ffffff 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #2a4365;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stitch-pattern {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background-image: url('https://www.transparenttextures.com/patterns/stitched-wool.png');
-      opacity: 0.3;
-      z-index: -1;
-    }
-    
-    .stitch-img {
-      width: 200px;
-      height: 200px;
-      margin-bottom: 20px;
-      animation: bounce 2s infinite;
-    }
-    
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    .poem-button {
-      background-color: #2a4365;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1.2em;
-      cursor: pointer;
-      margin: 15px 0;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: all 0.3s;
-    }
-    
-    .poem-button:hover {
-      background-color: #3c5a7d;
-      transform: scale(1.05);
-    }
-    
-    .poem-container {
-      display: none;
-      margin-top: 20px;
+      font-family: Arial, sans-serif;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 80%;
+      background: #f4f4f4;
     }
-    
-    .poem {
-      font-style: italic;
-      font-size: 1.2em;
-      color: #2a4365;
-      line-height: 1.6;
-    }
-    
     h1 {
-      color: #2a4365;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 10px;
+      text-align: center;
     }
-    
-    audio {
-      margin-top: 20px;
-      width: 250px;
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
     }
-    
-    .birthday-message {
-      margin-top: 20px;
-      font-size: 1.3em;
-      color: #2a4365;
-      font-weight: bold;
-    }
-    
-    .hearts {
-      position: absolute;
+    table {
       width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
+      margin-top: 15px;
+      border-collapse: collapse;
     }
-    
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff6b6b;
-      transform: rotate(45deg);
-      opacity: 0;
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
     }
-    
-    .heart:before, .heart:after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background-color: #ff6b6b;
-      border-radius: 50%;
-      position: absolute;
-    }
-    
-    .heart:before {
-      top: -10px;
-      left: 0;
-    }
-    
-    .heart:after {
-      left: 10px;
-      top: 0;
-    }
-
-    /* Contagem regressiva */
-    #countdown-container {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #2a4365;
-      color: white;
-      font-size: 5em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    
-    #countdown {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-shadow: 0 0 10px #6ad1f3;
-    }
-    
-    .countdown-text {
-      font-size: 0.5em;
-      margin-top: 20px;
+    tr:hover {
+      background: #e0e0e0;
     }
   </style>
 </head>
 <body>
-  <!-- Tela de contagem regressiva -->
-  <div id="countdown-container">
-    <div id="countdown">3</div>
-    <div class="countdown-text">Preparando uma surpresa especial...</div>
-  </div>
 
-  <!-- Conteúdo principal -->
-  <div class="stitch-pattern"></div>
-  <div class="hearts" id="hearts"></div>
-  
-  <img src="https://i.pinimg.com/originals/0e/7e/ee/0e7eee396eb5c1b40cf0b06c4d9f1411.png" alt="Stitch feliz" class="stitch-img">
-  
-  <h1>Feliz Aniversário, Pessoa Especial!</h1>
-  
-  <div class="birthday-message">
-    Hoje é o seu dia e quero te fazer feliz!<br>
-    Clique no botão para receber uma mensagem especial.
-  </div>
-  
-  <button class="poem-button" onclick="showPoem()">Abrir Mensagem Especial</button>
-  
-  <div class="poem-container" id="poem-container">
-    <div class="poem" id="poem"></div>
-  </div>
-  
-  <audio id="music" controls loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-    Seu navegador não suporta o elemento de áudio.
-  </audio>
-  
+  <h1>Controle de Materiais</h1>
+
+  <input type="text" id="nome" placeholder="Nome do material">
+  <input type="number" id="quantidade" placeholder="Quantidade" min="1">
+  <select id="status">
+    <option value="Em uso">Em uso</option>
+    <option value="Entregue">Entregue</option>
+    <option value="Faltando">Faltando</option>
+  </select>
+  <button onclick="adicionarItem()">Adicionar</button>
+  <button onclick="exportarCSV()">Exportar CSV</button>
+  <button onclick="resetar()">Resetar Tudo</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Qtd</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela"></tbody>
+  </table>
+
   <script>
-    // Contagem regressiva
-    let count = 3;
-    const countdownElement = document.getElementById("countdown");
-    const countdownContainer = document.getElementById("countdown-container");
-    
-    function startCountdown() {
-      const interval = setInterval(() => {
-        count--;
-        countdownElement.innerText = count;
-        if (count <= 0) {
-          clearInterval(interval);
-          countdownContainer.style.display = "none";
-          document.getElementById("music").play();
-        }
-      }, 1000);
+    let materiais = JSON.parse(localStorage.getItem("materiais") || "[]");
+
+    function salvar() {
+      localStorage.setItem("materiais", JSON.stringify(materiais));
+      render();
     }
-    
-    // Inicia a contagem assim que a página carregar
-    window.onload = startCountdown;
-    
-    // Poema e mensagem especial
-    const poemLines = [
-      "Hoje é um dia muito especial,",
-      "É o dia em que você veio ao mundo",
-      "E tornou ele mais bonito e feliz!",
-      "Que este novo ano de vida",
-      "Seja repleto de alegrias,",
-      "Conquistas e momentos inesquecíveis.",
-      "Você merece todo o amor do mundo!",
-      "Feliz Aniversário! ❤️"
-    ];
-    
-    function showPoem() {
-      const container = document.getElementById("poem-container");
-      const poemElement = document.getElementById("poem");
-      
-      // Mostra o container se estiver escondido
-      if (container.style.display !== "block") {
-        container.style.display = "block";
-        poemElement.innerHTML = "";
-        
-        // Adiciona cada linha do poema com um pequeno atraso
-        poemLines.forEach((line, index) => {
-          setTimeout(() => {
-            const p = document.createElement("p");
-            p.textContent = line;
-            poemElement.appendChild(p);
-            
-            // Cria corações flutuantes
-            createHearts();
-          }, index * 800);
-        });
+
+    function adicionarItem() {
+      const nome = document.getElementById("nome").value.trim();
+      const quantidade = parseInt(document.getElementById("quantidade").value);
+      const status = document.getElementById("status").value;
+
+      if (!nome || isNaN(quantidade)) return alert("Preencha os campos corretamente.");
+
+      materiais.push({ nome, quantidade, status });
+      salvar();
+
+      document.getElementById("nome").value = "";
+      document.getElementById("quantidade").value = "";
+    }
+
+    function deletar(i) {
+      if (confirm("Confirma remover este item?")) {
+        materiais.splice(i, 1);
+        salvar();
       }
     }
-    
-    // Cria corações flutuantes
-    function createHearts() {
-      const heartsContainer = document.getElementById("hearts");
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      
-      // Posição aleatória
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = Math.random() * 100 + "vh";
-      
-      // Tamanho aleatório
-      const size = Math.random() * 20 + 10;
-      heart.style.width = size + "px";
-      heart.style.height = size + "px";
-      
-      // Cor aleatória (azuis e rochos)
-      const colors = ["#6ad1f3", "#b3e0f2", "#ff6b6b", "#ffb8b8"];
-      heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      heart.querySelector(":before").style.backgroundColor = heart.style.backgroundColor;
-      heart.querySelector(":after").style.backgroundColor = heart.style.backgroundColor;
-      
-      // Animação
-      heart.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
-      
-      heartsContainer.appendChild(heart);
-      
-      // Remove o coração após a animação
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+
+    function mudarStatus(i) {
+      const novo = prompt("Novo status (Em uso, Entregue, Faltando):", materiais[i].status);
+      if (novo) {
+        materiais[i].status = novo;
+        salvar();
+      }
     }
-    
-    // Adiciona alguns corações periodicamente
-    setInterval(createHearts, 300);
+
+    function render() {
+      const tabela = document.getElementById("tabela");
+      tabela.innerHTML = "";
+      materiais.forEach((mat, i) => {
+        tabela.innerHTML += `
+          <tr>
+            <td>${mat.nome}</td>
+            <td>${mat.quantidade}</td>
+            <td>${mat.status}</td>
+            <td>
+              <button onclick="mudarStatus(${i})">Alterar Status</button>
+              <button onclick="deletar(${i})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function exportarCSV() {
+      let csv = "Material,Quantidade,Status\n";
+      materiais.forEach(m => {
+        csv += `${m.nome},${m.quantidade},${m.status}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "materiais.csv";
+      link.click();
+    }
+
+    function resetar() {
+      if (confirm("Apagar todos os dados?")) {
+        materiais = [];
+        salvar();
+      }
+    }
+
+    render();
   </script>
+
 </body>
 </html>
